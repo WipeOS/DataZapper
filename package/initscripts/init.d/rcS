@@ -1,13 +1,30 @@
 #!/bin/sh
 
-
 # Start all init scripts in /etc/init.d
 # executing them in numerical order.
 #
-for i in /etc/init.d/S??* ;do
 
+# start psplash
+/usr/bin/psplash -n 2>/dev/null &
+PSPLASH_PID=$!
+
+for i in {30..1}
+do
+	/usr/bin/psplash-write "MSG ${i}"
+	sleep 1
+done
+
+for i in /etc/init.d/S??*
+do
      # Ignore dangling symlinks (if any).
      [ ! -f "$i" ] && continue
+
+     # put the psplash progress bar to the
+     # corresponding level
+     name=${i##*/}
+     num=${name:1:2}
+     /usr/bin/psplash-write "MSG Starting ${name:3}..."
+     /usr/bin/psplash-write "PROGRESS $((${num#0}+1))"
 
      case "$i" in
 	*.sh)
@@ -25,3 +42,11 @@ for i in /etc/init.d/S??* ;do
     esac
 done
 
+/usr/bin/psplash-write "PROGRESS 0"
+
+MSG=$(echo -en "${MSG}\n\n-- Press ALT+F2 for service console")
+
+/usr/bin/psplash-write "MSG ${MSG}"
+
+# kill psplash after 2 seconds
+(sleep 30; kill ${PSPLASH_PID}) &
