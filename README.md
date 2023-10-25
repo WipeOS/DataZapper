@@ -79,11 +79,11 @@ You can also consider [VENTOY (Open Source tool to create bootable USB drive for
    1. [Download the DataZapper source using the git command and build DataZapper](https://github.com/PartialVolume/shredos.x86_64/blob/master/README.md#download-the-shredos-source-using-the-git-command-and-build-shredos)
    1. [Commands to configure buildroot, you will only need to use these if you are making changes to DataZapper](https://github.com/PartialVolume/shredos.x86_64/blob/master/README.md#commands-to-configure-buildroot-you-will-only-need-to-use-these-if-you-are-making-changes-to-shredos)
 1. [Important DataZapper files and folders when building from source](https://github.com/PartialVolume/shredos.x86_64/blob/master/README.md#important-shredos-files-and-folders-when-building-from-source)
-	1. [../board/shredos/doimg.sh](https://github.com/PartialVolume/shredos.x86_64/blob/master/README.md#boardshredosdoimgsh)
-	1. [../board/shredos/version.txt](https://github.com/PartialVolume/shredos.x86_64/blob/master/README.md#boardshredosversiontxt)
-	1. [../board/shredos/fsoverlay/](https://github.com/PartialVolume/shredos.x86_64/blob/master/README.md#boardshredosfsoverlay)
-	1. [../board/shredos/fsoverlay/etc/init.d/S40network](https://github.com/PartialVolume/shredos.x86_64/blob/master/README.md#boardshredosfsoverlayetcinitds40network)
-	1. [../board/shredos/fsoverlay/usr/bin/nwipe_launcher](https://github.com/PartialVolume/shredos.x86_64/blob/master/README.md#boardshredosfsoverlayusrbinnwipe_launcher)
+	1. [../board/datazapper/doimg.sh](https://github.com/PartialVolume/shredos.x86_64/blob/master/README.md#boardshredosdoimgsh)
+	1. [../board/datazapper/version.txt](https://github.com/PartialVolume/shredos.x86_64/blob/master/README.md#boardshredosversiontxt)
+	1. [../board/datazapper/fsoverlay/](https://github.com/PartialVolume/shredos.x86_64/blob/master/README.md#boardshredosfsoverlay)
+	1. [../board/datazapper/fsoverlay/etc/init.d/S40network](https://github.com/PartialVolume/shredos.x86_64/blob/master/README.md#boardshredosfsoverlayetcinitds40network)
+	1. [../board/datazapper/fsoverlay/usr/bin/nwipe_launcher](https://github.com/PartialVolume/shredos.x86_64/blob/master/README.md#boardshredosfsoverlayusrbinnwipe_launcher)
 	1. [../package/nwipe/](#packagenwipe)
 	1. [../package/nwipe/nwipe.mk](#packagenwipenwipemk)
 	1. [../package/nwipe/nwipe.hash](#packagenwipenwipehash)
@@ -370,7 +370,7 @@ The nwipe that is automatically launched in the first virtual terminal ALT-F1, c
 ### Transferring nwipe log files to a USB storage device
 1. Locate the device name of your USB stick from it's model & size. 
 
-For Linux: If the | character isn't displayed properly use loadkeys fr etc to select the correct keyboard if not US qwerty prior to running this pipe command.
+For Linux: If the | character isn't displayed properly, use loadkeys fr etc to select the correct keyboard if not US qwerty prior to running this pipe command.
 ```
 fdisk -l | more
 ```
@@ -398,8 +398,8 @@ cd /;umount store
 DataZapper uses the lftp application to transfer files to a remote server. To enable the automatic transfer of nwipe log files, you will need to edit both grub.cfg files (/boot/grub/grub.cfg and /EFI/BOOT/grub.cfg) on the DataZapper USB memory stick. In much the same way you you specify loadkeys or nwipe options which are described above, you edit the linux kernal command line and add the following lftp="open 192.168.1.60; user your-username your-password; cd data; mput nwipe_*.txt", changing the IP, username and password as required. As ftp does not encrypt data you should really only use it to transfer data on your local area network and not over the internet. sftp may be implemented at a future date if users request that feature. You can also manually use lftp on the command line (ALT-F2 or ALT-F3) if you prefer. I use this feature with a chrooted vsftpd ftp server on a Linux PC. The automatic transfer of nwipe log files will be initiated on completion of all wipes and after pressing any key in nwipe to exit. The lftp status will be shown after the nwipe summary table.
 		
 **IMPORTANT**
-- I would recommend you setup a new user account on the system that hosts your ftp server and only use that new user's account, username and password with DataZapper. You don't want to use your own personal user account details as you will be placing those details on the DataZapper USB storage device in a plain text format.
-- For security reasons, you should setup your ftp server as chrooted.
+- I would recommend you set up a new user account on the system that hosts your ftp server and only use that new user's account, username and password with DataZapper. You don't want to use your own personal user account details as you will be placing those details on the DataZapper USB storage device in a plain text format.
+- For security reasons, you should set up your ftp server as chrooted.
 		
 Example grub.cfg with the lftp option appended:
 ```
@@ -480,7 +480,7 @@ shredos login: root
 
 sh-5.1# nwipe
 ```
-Type `nwipe` as shown above and the nwipe GUI will be displayed and you can proceed with wiping the discs. On some terminals, i.e retro, nwipe doesn't display properly. If you find this then use a different terminal to launch nwipe. Terminals that do work ok are KDE's Konsole, terminator, guake, tmux, xfce terminal and xterm. Terminals that don't seem to work properly via a telnet session with nwipe are cool retro term and qterminal. Putty works but doesn't have the correct box characters but is usable. Putty may work perfectly if you can set the correct character encoding. These are my observations using KDE Neon, they may differ on your systems. If you find a workaround for those terminals that don't display nwipe perfectly over telnet, then please let me know. 
+Type `nwipe` as shown above and the nwipe GUI will be displayed, and you can proceed with wiping the discs. On some terminals, i.e., retro, nwipe doesn't display properly. If you find this then use a different terminal to launch nwipe. Terminals that do work ok are KDE's Konsole, terminator, guake, tmux, xfce terminal and xterm. Terminals that don't seem to work properly via a telnet session with nwipe are cool retro term and qterminal. Putty works but doesn't have the correct box characters but is usable. Putty may work perfectly if you can set the correct character encoding. These are my observations using KDE Neon, they may differ on your systems. If you find a workaround for those terminals that don't display nwipe perfectly over telnet, then please let me know. 
 		
 > **Warning** 
 >Due to the insecure nature of telnet as opposed to ssh, it goes without saying that this method of accessing DataZapper & nwipe should only be carried out on a trusted local area network and never over the internet unless via a VPN or SSH tunnel. ssh access may be provided at a future date if it's requested.
@@ -505,7 +505,7 @@ To set the font for the default nwipe in the first virtual console ALT F1 (/dev/
 
 
 ![image](https://user-images.githubusercontent.com/22084881/216849290-8e1c05d2-c856-4466-b76f-eec4ccd2d880.png)
-Default font size on a high resolution monitor.
+Default font size on a high-resolution monitor.
 .
 ![image](https://user-images.githubusercontent.com/22084881/216849326-e9a5c3a0-4485-432a-a3c7-a72858faeab1.png)
 After running the setfont command.
@@ -513,21 +513,21 @@ After running the setfont command.
 ## DataZapper includes the following related programs
 
 #### smartmontools
-Nwipes ability to detect serial numbers on USB devices now works on USB bridges who's chipset supports that functionality.Smartmontools provides nwipe with that capability. Smartmontools can be used in the second or third virtual terminal. ALT-F2 and ALT-F3.
+Nwipes ability to detect serial numbers on USB devices now works on USB bridges whose chipset supports that functionality. Smartmontools provides nwipe with that capability. Smartmontools can be used in the second or third virtual terminal. ALT-F2 and ALT-F3.
 
 #### hexedit
 Use hexedit to examine and modify the contents of a hard disk. Hexedit can be used in the second or third virtual terminal. ALT-F2 and ALT-F3.
 
 #### hdparm
-hdparm has many uses and is a powerfull tool. Although Nwipe will be adding ATA secure erase capability, i.e using the hard disk own firmware to initiate an erase, nwipe currently wipes drives using the traditional method of writing to every block. If you want to initiate a ATA secure erase using the drives firmware then hdparm will be of use.
+hdparm has many uses and is a powerful tool. Although Nwipe will be adding ATA secure erase capability, i.e using the hard disk own firmware to initiate an erase, nwipe currently wipes drives using the traditional method of writing to every block. If you want to initiate a ATA secure erase using the drives firmware then hdparm will be of use.
 
 
-## Compiling DataZapper and burning to USB stick, the harder way !
+## Compiling DataZapper and burning to USB stick, the harder way!
 
 The DataZapper system is based on the buildroot tool whos main application is to create operating systems for embedded systems.
 The image (.img) file is approximately 60 MiB and can be written to a USB memory stick with a tool such as dd or Etcher.
 
-### You can build shredos using the following commands. This example build was compiled on KDE Neon (Ubuntu 20.04).
+### You can build DataZapper using the following commands. This example build was compiled on KDE Neon (Ubuntu 20.04).
 
 #### Install the following prerequisite software first. Without this software, the make command will fail
 ```
@@ -547,12 +547,12 @@ $ touch package/shredos/Config.in
 $ make clean
 $ make shredos_defconfig
 $ make
-$ ls output/images/shredos*.img
+$ ls output/images/datazapper*.img
 $ cd output/images
 $ dd if=shredos-20200412.img of=/dev/sdx (20200412 will be the day you compiled, sdx is the USB flash drive)
 ```
 ### Issues that you may get when building DataZapper
-- **Error: "Internal Size Too Big"** If you are compiling the vanilla version of DataZapper and have made no alterations or additions but it fails to build the .img with the error "Internal error: size too big" then you may have a version of mtools that has a version of mcopy which has a bug whenever the -b option is used. This bug is known to exist in mcopy version 4.0.32 and maybe others but is fixed in v4.0.42. The solution is to upgrade your copy of mtools to a later version. However, if you have altered DataZapper by adding more packages you may need to update the size of the fat32 partition. You can do this by increasing the 'size' in ../board/shredos/genimage.cfg. Depending on how much extra software you have added increase the size by 10MB or more. Currently as of March 2023 the current size is `size = 130000000`, this is in bytes, so adding 10MB will mean you need to edit this value so that it reads `size = 140000000`. After the edit, just run `make` which will result in a quicker build. You don't need to run `make clean` first as that would result in a full rebuild which is not neccessary when all you are doing is increasing the final image size. If your repository does not supply a later version of mtools, then you can obtain mtools packages for various distros from [here](https://www.gnu.org/software/mtools/#downloads)
+- **Error: "Internal Size Too Big"** If you are compiling the vanilla version of DataZapper and have made no alterations or additions but it fails to build the .img with the error "Internal error: size too big" then you may have a version of mtools that has a version of mcopy which has a bug whenever the -b option is used. This bug is known to exist in mcopy version 4.0.32 and maybe others but is fixed in v4.0.42. The solution is to upgrade your copy of mtools to a later version. However, if you have altered DataZapper by adding more packages you may need to update the size of the fat32 partition. You can do this by increasing the 'size' in ../board/datazapper/genimage.cfg. Depending on how much extra software you have added increase the size by 10MB or more. Currently as of March 2023 the current size is `size = 130000000`, this is in bytes, so adding 10MB will mean you need to edit this value so that it reads `size = 140000000`. After the edit, just run `make` which will result in a quicker build. You don't need to run `make clean` first as that would result in a full rebuild which is not neccessary when all you are doing is increasing the final image size. If your repository does not supply a later version of mtools, then you can obtain mtools packages for various distros from [here](https://www.gnu.org/software/mtools/#downloads)
 
 >INFO: vfat(boot.vfat): cmd: "MTOOLS_SKIP_CHECK=1 mcopy -bsp -i '/home/shredos/Downloads/shredos/mcopybug/shredos.x86_64/output/images/boot.vfat' '/home/shredos/Downloads/shredos/mcopybug/shredos.x86_64/output/images/grub.cfg' '::boot/grub/grub.cfg'" (stderr):
 ***Internal error, size too big***
@@ -582,20 +582,20 @@ make busybox-update-config # save the changes
 ```
 ### Important DataZapper files and folders when building DataZapper from source
 
-#### ../board/shredos/doimg.sh
-doimg.sh is a bash script, the main purpose of which is to generate the .img file located in output/images/. However it is also used to copy the pre-compiled .efi file and other files such as the shredos.ico, autorun.inf for Windows, README.txt. The contents of board/shredos/version.txt is also used to rename the .img file with version info and the current date and time.
+#### ../board/datazapper/doimg.sh
+doimg.sh is a bash script, the main purpose of which is to generate the .img file located in output/images/. However it is also used to copy the pre-compiled .efi file and other files such as the shredos.ico, autorun.inf for Windows, README.txt. The contents of board/datazapper/version.txt is also used to rename the .img file with version info and the current date and time.
 		
-#### ../board/shredos/version.txt
-This file contains the version information as seen in the title on nwipe's title bar, i.e. '2021.08.2_22_x86-64_0.32.023'. This version ingformation is also used when naming the .img file in ../output/images/ /board/shredos/version.txt is manually updated for each new release of DataZapper.
+#### ../board/datazapper/version.txt
+This file contains the version information as seen in the title on nwipe's title bar, i.e. '2021.08.2_22_x86-64_0.32.023'. This version ingformation is also used when naming the .img file in ../output/images/ /board/datazapper/version.txt is manually updated for each new release of DataZapper.
 		
-#### ../board/shredos/fsoverlay/
-This fsoverlay directory contains files and folders that are directly copied into the root filesystem of DataZapper. A example of this is the  ../board/shredos/fsoverlay/etc/inittab file where the tty1 and tty2 virtual terminals are configured. This is where you will find the script `/usr/bin/nwipe_launcher` that automatically starts in tty1 after DataZapper has booted. If you want to place or overwrite a specific file in the root filesystem of DataZapper, the ../board/shredos/fsoverlay/ directory is one way of inserting your own files.
+#### ../board/datazapper/fsoverlay/
+This fsoverlay directory contains files and folders that are directly copied into the root filesystem of DataZapper. A example of this is the  ../board/datazapper/fsoverlay/etc/inittab file where the tty1 and tty2 virtual terminals are configured. This is where you will find the script `/usr/bin/nwipe_launcher` that automatically starts in tty1 after DataZapper has booted. If you want to place or overwrite a specific file in the root filesystem of DataZapper, the ../board/datazapper/fsoverlay/ directory is one way of inserting your own files.
 		
-#### ../board/shredos/fsoverlay/etc/init.d/S40network
-S40network is responsible for starting the network & obtaining a IP address via DHCP by starting a DataZapper script called `/usr/bin/shredos_net.sh` The shredos_net.sh script can also be found in the fsoverlay directory `../board/shredos/fsoverlay/usr/bin/shredos_net.sh` which then ends up in the directory /usr/bin/ of the DataZapper filesystem.
+#### ../board/datazapper/fsoverlay/etc/init.d/S40network
+S40network is responsible for starting the network & obtaining a IP address via DHCP by starting a DataZapper script called `/usr/bin/shredos_net.sh` The shredos_net.sh script can also be found in the fsoverlay directory `../board/datazapper/fsoverlay/usr/bin/shredos_net.sh` which then ends up in the directory /usr/bin/ of the DataZapper filesystem.
 		
-#### ../board/shredos/fsoverlay/usr/bin/nwipe_launcher
-nwipe_launcher starts the nwipe program in tty1, see ../board/shredos/fsoverlay/etc/inittab which is where nwipe_launcher is called from. The nwipe_launcher script, apart from starting nwipe in tty1 also is responsible for calling the lftp program to automatically transfer log files to a remote ftp server on your local area network, assuming lftp has been enabled on the kernel command line. It also contains the 4,3,2,1 countdown and nwipe restart code.
+#### ../board/datazapper/fsoverlay/usr/bin/nwipe_launcher
+nwipe_launcher starts the nwipe program in tty1, see ../board/datazapper/fsoverlay/etc/inittab which is where nwipe_launcher is called from. The nwipe_launcher script, apart from starting nwipe in tty1 also is responsible for calling the lftp program to automatically transfer log files to a remote ftp server on your local area network, assuming lftp has been enabled on the kernel command line. It also contains the 4,3,2,1 countdown and nwipe restart code.
 		
 #### ../package/nwipe/
 All programs in DataZapper appear under their individual sub-directory under the package directory, therefore, you will find all the information relating to the build of nwipe under ../package/nwipe. The four files contained here are involved in downloading the nwipe source from https://github.com/PartialVolume/nwipe, checking the integrity of the source by comparison of the hash, patching the nwipe version.c and compiling the code. Each file in ../package/nwipe/ is descibed below.
