@@ -11,7 +11,7 @@ cp "output/target/lib/grub/i386-pc/boot.img" "${BINARIES_DIR}/boot.img"    || ex
 # it will be identified as 'DataZapper - Dangerous' as a warning to users unaware what DataZapper is.
 cp "board/datazapper/autorun.inf"             "${BINARIES_DIR}/autorun.inf" || exit 1
 cp "board/datazapper/README.txt"              "${BINARIES_DIR}/README.txt"  || exit 1
-cp "board/datazapper/datazapper.ico"             "${BINARIES_DIR}/datazapper.ico" || exit 1
+cp "board/datazapper/DataZapper.ico"             "${BINARIES_DIR}/DataZapper.ico" || exit 1
 
 rm -rf "${BUILD_DIR}/genimage.tmp"                                       || exit 1
 genimage --rootpath="${TARGET_DIR}" --inputpath="${BINARIES_DIR}" --outputpath="${BINARIES_DIR}" --config="board/datazapper/genimage.cfg" --tmppath="${BUILD_DIR}/genimage.tmp" || exit 1
