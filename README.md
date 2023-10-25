@@ -542,8 +542,8 @@ $ sudo apt-get install mtools
 ```
 $ git clone https://github.com/PartialVolume/shredos.x86_64.git (or shredos.i686.git for 32bit)
 $ cd shredos
-$ mkdir package/shredos
-$ touch package/shredos/Config.in
+$ mkdir package/datazapper
+$ touch package/datazapper/Config.in
 $ make clean
 $ make datazapper_defconfig
 $ make
