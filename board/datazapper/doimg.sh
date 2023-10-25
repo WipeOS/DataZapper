@@ -18,8 +18,8 @@ genimage --rootpath="${TARGET_DIR}" --inputpath="${BINARIES_DIR}" --outputpath="
 
 # renaming
 SUFFIXIMG="${version}_$(date +%Y%m%d)"
-FINAL_IMAGE_PATH="${BINARIES_DIR}/datazapper-${SUFFIXIMG}.img"
-mv "${BINARIES_DIR}/datazapper.img" "${FINAL_IMAGE_PATH}" || exit 1
+FINAL_IMAGE_PATH="${BINARIES_DIR}/shredos-${SUFFIXIMG}.img"
+mv "${BINARIES_DIR}/shredos.img" "${FINAL_IMAGE_PATH}" || exit 1
 #mv "${BINARIES_DIR}/bzImage" "${FINAL_IMAGE_PATH}" || exit 1
 
 echo "File ${FINAL_IMAGE_PATH} created successfully"
