@@ -545,7 +545,7 @@ $ cd shredos
 $ mkdir package/shredos
 $ touch package/shredos/Config.in
 $ make clean
-$ make shredos_defconfig
+$ make datazapper_defconfig
 $ make
 $ ls output/images/datazapper*.img
 $ cd output/images
@@ -565,7 +565,7 @@ make: [Makefile:84: _all] Error 2
 
 ### Commands to configure buildroot, you will only need to use these if you are making changes to DataZapper
 
-#### Change buildroot configuration, select the architecture, install software packages then save the buildroot config changes to shredos_defconfig, the location if which is defined in the buildroot config within `make menuconfig` ALWAYS RUN `make savedefconfig` AFTER CHANGES are made in menuconfig.
+#### Change buildroot configuration, select the architecture, install software packages then save the buildroot config changes to datazapper_defconfig, the location if which is defined in the buildroot config within `make menuconfig` ALWAYS RUN `make savedefconfig` AFTER CHANGES are made in menuconfig.
 ```		
 $ make menuconfig
 $ make savedefconfig # save the changes
