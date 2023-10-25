@@ -583,7 +583,7 @@ make busybox-update-config # save the changes
 ### Important DataZapper files and folders when building DataZapper from source
 
 #### ../board/datazapper/doimg.sh
-doimg.sh is a bash script, the main purpose of which is to generate the .img file located in output/images/. However it is also used to copy the pre-compiled .efi file and other files such as the shredos.ico, autorun.inf for Windows, README.txt. The contents of board/datazapper/version.txt is also used to rename the .img file with version info and the current date and time.
+doimg.sh is a bash script, the main purpose of which is to generate the .img file located in output/images/. However it is also used to copy the pre-compiled .efi file and other files such as the DataZapper.ico, autorun.inf for Windows, README.txt. The contents of board/datazapper/version.txt is also used to rename the .img file with version info and the current date and time.
 		
 #### ../board/datazapper/version.txt
 This file contains the version information as seen in the title on nwipe's title bar, i.e. '2021.08.2_22_x86-64_0.32.023'. This version ingformation is also used when naming the .img file in ../output/images/ /board/datazapper/version.txt is manually updated for each new release of DataZapper.
