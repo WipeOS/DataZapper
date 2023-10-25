@@ -2,7 +2,7 @@
 <br />
 <p align="left">
   <a href="https://github.com/PartialVolume/shredos.x86_64/">
-    <img src="images/shred_db.png" alt="Logo" width="160" height="160">
+    <img src="images/DataZapper_db.png" alt="Logo" width="160" height="160">
   </a>
 </p>
 	<p align="left">

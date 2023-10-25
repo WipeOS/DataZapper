@@ -41,7 +41,7 @@ then
 
 	# Remove the --autopoweroff string if present from the nwipe options.
 	# We do this because we don't want nwipe itself to power down the system.
-	# ShredOS will handle the auto power down once the logs and dmesg output
+	# DataZapper will handle the auto power down once the logs and dmesg output
 	# have been transferred to the USB flash drive after the wipe completes.
 	# One feature of nwipes autopoweroff is that it does not require the user
 	# to press a key to exit. So that nwipe doesn't pause waiting for the

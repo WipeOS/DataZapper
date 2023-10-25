@@ -1,4 +1,4 @@
-ShredOS is a USB bootable (BIOS or UEFI) small linux distribution with the sole purpose of securely erasing the entire contents of your disks using the program nwipe
+DataZapper is a USB bootable (BIOS or UEFI) small linux distribution with the sole purpose of securely erasing the entire contents of your disks using the program nwipe
 
 https://github.com/PartialVolume/shredos.2020.02
 https://github.com/PartialVolume/shredos.i686

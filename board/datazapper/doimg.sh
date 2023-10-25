@@ -7,8 +7,8 @@ cp "board/datazapper/bootx64.efi"             "${BINARIES_DIR}/bootx64.efi" || e
 #cp "${HOST_DIR}/lib/grub/i386-pc/boot.img" "${BINARIES_DIR}/boot.img"    || exit 1
 cp "output/target/lib/grub/i386-pc/boot.img" "${BINARIES_DIR}/boot.img"    || exit 1
 
-# copy the ShredOS icon and Windows autorun.inf; if a USB stick is plugged into a Windows system
-# it will be identified as 'ShredOS - Dangerous' as a warning to users unaware what ShredOS is.
+# copy the DataZapper icon and Windows autorun.inf; if a USB stick is plugged into a Windows system
+# it will be identified as 'DataZapper - Dangerous' as a warning to users unaware what DataZapper is.
 cp "board/datazapper/autorun.inf"             "${BINARIES_DIR}/autorun.inf" || exit 1
 cp "board/datazapper/README.txt"              "${BINARIES_DIR}/README.txt"  || exit 1
 cp "board/datazapper/datazapper.ico"             "${BINARIES_DIR}/datazapper.ico" || exit 1

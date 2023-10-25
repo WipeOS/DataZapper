@@ -1,20 +1,20 @@
 // -*- mode:doc; -*-
 // vim: set syntax=asciidoc:
 
-= The ShredOS user and developer manual
+= The DataZapper user and developer manual
 :toc:
 
-ShredOS {sys:echo $\{BR2_VERSION%%-git*\}} manual generated on {localdate}
+DataZapper {sys:echo $\{BR2_VERSION%%-git*\}} manual generated on {localdate}
 {localtime} from git revision {sys:git rev-parse --short HEAD}
 
-The ShredOS user and developer manual is written by the PartialVolume and the ShredOS developers.
+The DataZapper user and developer manual is written by the PartialVolume and the DataZapper developers.
 It is licensed under the GNU General Public License, version 2. Refer to the
 http://git.buildroot.org/buildroot/tree/COPYING?id={sys:git rev-parse HEAD}[COPYING]
 file in the Buildroot sources for the full text of this license.
 
-Copyright (C) 2018-2021 PartialVolume and The ShredOS developers
+Copyright (C) 2023 WipeOS and The DataZapper developers
 
-image::/images/shred_db.png[]
+image::/images/DataZapper_db.png[]
 
 = Getting started
 
