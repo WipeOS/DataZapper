@@ -4,9 +4,11 @@
 #
 trap "echo" INT
 
-# archive dmesg.txt and nwipe logs prior to launching nwipe. This is done just
-# in case there are any display issues and we want to take a look at the dmesg data.
-/usr/bin/archive_log.sh
+ZAPPERDISKPATH=$(lsblk -o name,label | grep ZAP | grep -Eo 'sd[a-z]+') # sdb
+ZAPPERREPORTPATH=/dev/"$ZAPPERDISKPATH"2 # /dev/sdb2
+mkfs.vfat "$ZAPPERREPORTPATH"
+mkdir archive
+mount "$ZAPPERREPORTPATH" archive
 
 # initialise
 #
@@ -15,7 +17,7 @@ nwipe_options_string=""
 lftp_command_line=""
 http_post_url=""
 autopoweroff=0
-logfile="nwipe_log_$(date +%Y%m%d-%H%M%S).txt"
+logfile="archive/nwipe_log_$(date +%Y%m%d-%H%M%S).txt"
 
 echo "[`date`] lftp log" > lftp.log
 echo "[`date`] wget log" > wget.log
@@ -100,6 +102,14 @@ else
     /usr/bin/nwipe --logfile=$logfile $nwipe_options_string
 fi
 
+sync
+
+umount "$ZAPPERREPORTPATH"
+
+dd if=/dev/zero of=/dev/"$ZAPPERDISKPATH" bs=512 count=449219 seek=1263
+
+eject /dev/"$ZAPPERDISKPATH"
+
 # read the kernel command line for a lftp command
 # example lftp command "open 192.168.1.60; user joe joe's_password; cd data; mput nwipe_*.txt
 #
@@ -143,8 +153,6 @@ then
 	fi
 fi
 
-/usr/bin/archive_log.sh
-
 # If the user specified --autopoweroff as a nwipe option then shutdown now 
 #
 if [ $autopoweroff == 1 ]
@@ -164,4 +172,3 @@ printf " 2"
 sleep 1
 printf " 1"
 done
-
