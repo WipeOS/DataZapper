@@ -17,7 +17,7 @@ nwipe_options_string=""
 lftp_command_line=""
 http_post_url=""
 autopoweroff=0
-logfile="archive/nwipe_log_$(date +%Y%m%d-%H%M%S).txt"
+logfile="archive/datazapper_log_$(date +%Y%m%d-%H%M%S).txt"
 
 echo "[`date`] lftp log" > lftp.log
 echo "[`date`] wget log" > wget.log
@@ -126,7 +126,8 @@ then
 	if [ $? == 0 ]
 	then
 		echo "[`date`] lftp completed sucessfully"
-		echo "[`date`] moving nwipe logs to ../exported"
+		echo "[`date`] moving datazapper logs to ../exported"
+    sed -i '$ d' $logfile
 		mv $logfile exported/
 	else
 		echo "[`date`] lftp command failed, See above and lftp.log for details"
@@ -146,7 +147,8 @@ then
 	if [ $? == 0 ]
 	then
 		echo "[`date`] wget completed sucessfully"
-		echo "[`date`] moving nwipe logs to ../exported"
+		echo "[`date`] moving datazapper logs to ../exported"
+    sed -i '$ d' $logfile
 		mv $logfile exported/
 	else
 		echo "[`date`] wget command failed, See above and wget.log for details"
@@ -161,7 +163,6 @@ then
 fi
 
 printf ""
-printf "Paused, press a key to restart nwipe."
 read -rsn1 input
 sleep 1;
 printf " 4"
